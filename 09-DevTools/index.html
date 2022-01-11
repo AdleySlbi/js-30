@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Console Tricks!</title>
+</head>
+
+<body>
+
+    <p onClick="makeGreen()" id="brkDwn">×BREAK×DOWN×</p>
+
+    <script>
+        const dogs = [{ name: 'Snickers', age: 2 }, { name: 'hugo', age: 8 }];
+
+        function makeGreen() {
+            const p = document.querySelector('p');
+            p.style.color = '#BADA55';
+            p.style.fontSize = '50px';
+            console.count('This is a test');
+        }
+
+        // Regular
+        console.log("This is a Regular console.log")
+
+        // Interpolated
+        console.log("This is ", "a Interpolated console.log")
+
+        // Styled
+        console.log(`%c This is as styled console.log`, `background-color: red; font-size: 50px`)
+
+        // warning!
+        console.warn("this is a console.warn")
+
+        // Error :|
+        console.error("This is a (enormous) error")
+
+        // Info
+        console.info("This is a console.info")
+
+        // Testing
+        console.assert(1 === 1, "No working") // True so it will show nothing
+        console.assert(1 === 2, "No working") // False so it will show something
+
+        // clearing
+        // console.clear();
+
+        // Viewing DOM Elements
+        let test = document.querySelector('#brkDwn');
+        console.log(test)
+
+        // Grouping together
+        // Version without collaps
+        dogs.forEach(dog => {
+            console.group(`${dog.name}`);
+            console.log(`This is ${dog.name}`)
+            console.log(`${dog.name} is ${dog.age} years old`)
+            console.groupEnd(`${dog.name}`);
+        })
+
+        // Version with collapsed 
+        dogs.forEach(dog => {
+            console.groupCollapsed(`${dog.name}`);
+            console.log(`This is ${dog.name}`)
+            console.log(`${dog.name} is ${dog.age} years old`)
+            console.groupEnd(`${dog.name}`);
+        })
+        // counting
+        console.count('John');
+        console.count('John');
+        console.count('John');
+        console.count('John');
+        // It will print 
+        // John: 1
+        // John: 2
+        // John: 3
+        // John: 4
+
+    // timing & table
+    console.time('fetchingDate'); // The argument must be the same as in TimeEnd
+    fetch('https://api.binance.com/api/v3/ticker/price')
+        .then(data => data.json())
+        .then(data => {
+            console.timeEnd('fetchingDate'); // The argument must be the same as in .time
+            console.table(data);
+        })
+    </script>
+</body>
+
+</html>
+
+
